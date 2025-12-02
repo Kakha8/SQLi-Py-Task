@@ -1,3 +1,5 @@
+import hashlib
+
 import requests
 
 url = "http://localhost:8080/users"
@@ -8,6 +10,12 @@ def create_user(data):
 
     print("Status:", r.status_code)
     print("Response:", r.text)
+
+def sha1_hash(salt, password):
+    h = hashlib.sha1()
+    h.update((salt + password).encode())
+
+    print(h.hexdigest())
 
 if __name__ == '__main__':
     data = {
