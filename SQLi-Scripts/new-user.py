@@ -17,12 +17,21 @@ def sha1_hash(salt, password):
 
     print(h.hexdigest())
 
+def get_salt():
+    with open("salt.txt", "r") as file:
+        salt_value = file.read()
+
+    return salt_value
+
+
 if __name__ == '__main__':
+    salt = get_salt()
+    password = "kakhaPassword";
     data = {
         "userName": "kakha1",
         "userFName": "Kakha",
         "userLName": "Kudava",
-        "password": "kakhaPassword"
+        "password": f"{salt + password}"
     }
 
     create_user(data)
